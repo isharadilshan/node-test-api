@@ -2,6 +2,8 @@ const router = require("express").Router();
 const asyncWrapper = require("../utilities/async-wrapper");
 const DocumentService = require("../services/document");
 const documentService = new DocumentService();
+const UserService = require("../services/user");
+const userService = new UserService();
 
 router.get(
   "/",
@@ -14,9 +16,33 @@ router.get(
 );
 
 router.post(
-  "/document",
+  "/documents",
   asyncWrapper(async (req, res) => {
     const response = await documentService.createDocument(req.body);
+    res.send(response);
+  })
+);
+
+router.get(
+  "/documents",
+  asyncWrapper(async (req, res) => {
+    const response = await documentService.getAllDocuments(req.query);
+    res.send(response);
+  })
+);
+
+router.post(
+  "/users",
+  asyncWrapper(async (req, res) => {
+    const response = await userService.createUser(req.body);
+    res.send(response);
+  })
+);
+
+router.get(
+  "/users",
+  asyncWrapper(async (req, res) => {
+    const response = await userService.getUser(req.query);
     res.send(response);
   })
 );

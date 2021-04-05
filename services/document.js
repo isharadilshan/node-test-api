@@ -31,4 +31,12 @@ module.exports = class DocumentService {
     delete res.__v;
     return res;
   }
+
+  async getAllDocuments(data) {
+    const { ownedBy, documentStatus } = data;
+    return Document.find({
+      "documentState.owner.name": ownedBy,
+      "documentState.documentStatus": documentStatus,
+    });
+  }
 };

@@ -1,7 +1,7 @@
 const mongoose = require("../database");
 const Schema = mongoose.Schema;
 
-const documenttSchema = new Schema({
+const documentSchema = new Schema({
   id: { type: mongoose.SchemaTypes.String },
   sender: {
     name: { type: mongoose.SchemaTypes.String },
@@ -34,11 +34,7 @@ const documenttSchema = new Schema({
 
 const collectionName = "document";
 
-const Document = mongoose.model(
-  collectionName,
-  documenttSchema,
-  collectionName
-);
+const Document = mongoose.model(collectionName, documentSchema, collectionName);
 
 module.exports = {
   Document,
