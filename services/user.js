@@ -18,6 +18,6 @@ module.exports = class UserService {
 
   async getUser(data) {
     const { userName, password } = data;
-    return User.find({ userName: userName, password: password });
+    return User.findOne({ userName: userName, password: password });
   }
 };

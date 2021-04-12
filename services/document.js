@@ -39,4 +39,29 @@ module.exports = class DocumentService {
       "documentState.documentStatus": documentStatus,
     });
   }
+
+  async getDocument(_id) {
+    return Document.findById(_id);
+  }
+
+  async updateDocuments(data) {
+    const { ownedBy, ids } = data;
+    const arr = ids.split(",");
+    return Document.updateMany(
+      {
+        _id: {
+          $in: arr,
+        },
+      },
+      {
+        "documentState.owner": ownedBy,
+        "documentState.documentStatus": "SIGNED",
+      },
+      {
+        new: true,
+        omitUndefined: true,
+        fields: "-__v -createdAt -updatedAt",
+      }
+    );
+  }
 };

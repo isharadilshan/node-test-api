@@ -15,10 +15,18 @@ router.get(
   })
 );
 
+// router.post(
+//   "/documents",
+//   asyncWrapper(async (req, res) => {
+//     const response = await documentService.createDocument(req.body);
+//     res.send(response);
+//   })
+// );
+
 router.post(
   "/documents",
   asyncWrapper(async (req, res) => {
-    const response = await documentService.createDocument(req.body);
+    const response = await documentService.updateDocuments(req.body);
     res.send(response);
   })
 );
@@ -27,6 +35,14 @@ router.get(
   "/documents",
   asyncWrapper(async (req, res) => {
     const response = await documentService.getAllDocuments(req.query);
+    res.send(response);
+  })
+);
+
+router.get(
+  "/documents/:id",
+  asyncWrapper(async (req, res) => {
+    const response = await documentService.getDocument(req.params.id);
     res.send(response);
   })
 );
